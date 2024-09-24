@@ -22,10 +22,19 @@ public class ItemService {
     public Optional<Item> singleItem(String wowheadId) {return itemRepository.findItemBywowheadId(wowheadId);}
 
 
+    public void deleteById(String wowheadId) {
+        Optional<Item> item = itemRepository.findItemBywowheadId(wowheadId);
+        if (item.isPresent()) {
+            itemRepository.delete(item.get());
+        }
+    }
+
 
 
     public Item createItem(Item item) {
         Item saved = itemRepository.save(item);
         return item;
     }
+
+
 }
