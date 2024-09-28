@@ -1,5 +1,7 @@
 package dev.peterross.Ttracker2;
 
+import java.io.Console;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,8 +42,15 @@ public class ItemController {
 
     @DeleteMapping("/{wowheadId}")
     public ResponseEntity<Void> deleteItem(@PathVariable String wowheadId) {
-        itemService.deleteById(wowheadId);
-        return ResponseEntity.noContent().build();
+        boolean isDeleted = itemService.deleteById(wowheadId);
+
+        if(isDeleted) {
+            return ResponseEntity.noContent().build();
+            
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+       
     }
 
 
