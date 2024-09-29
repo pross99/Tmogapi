@@ -1,9 +1,9 @@
 WoW Item Tracker Backend
-This is a backend application built using Java Spring Boot for tracking wanted items in World of Warcraft (WoW). It allows players to manage a list of in-game items they are looking for, track their progress, and stay updated on their collection goals.
+This is a backend application built using Java Spring Boot for tracking wanted items in World of Warcraft (WoW). It allows players to manage a list of in-game items they are looking for and track their progress
 
 Features
 Item Management: Add, update, and delete items you are tracking.
-Progress Tracking: Keep track of which items you have acquired and which are still needed.
+Progress Tracking: Keep track of which items you have acquired and which are still needed(Not yet implemented).
 RESTful API: Provides RESTful endpoints to interact with the system.
 
 
@@ -12,6 +12,7 @@ Java: The backend is built using Java.
 Spring Boot 3.x: For creating RESTful APIs and managing the backend logic..
 MongoDB: Supported databases (configurable).
 Maven: For project management and dependency management.
+ngrok: to run both spring boot and front end project locally on the same machine
 
 
 
@@ -24,6 +25,7 @@ Java
 Maven
 MongoDB atlas web and/or MongoDB Compass
 Git
+ngrok
 
 
 
