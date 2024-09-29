@@ -13,6 +13,7 @@ Spring Boot 3.x: For creating RESTful APIs and managing the backend logic..
 MongoDB: Supported databases (configurable).
 Maven: For project management and dependency management.
 ngrok: to run both spring boot and front end project locally on the same machine
+Docker: packaged as a Docker container for easy deployment and replaceing the need for ngrok
 
 
 
@@ -26,6 +27,7 @@ Maven
 MongoDB atlas web and/or MongoDB Compass
 Git
 ngrok
+Docker
 
 
 
@@ -44,3 +46,7 @@ MONGO_DATABASE: name of the database
 MONGO_USER: name of the user created under "Database Access"
 MONGO_PASSWORD: password for the user
 MONGO_CLUSTER: name of the cluster
+
+To run the application, you can build the Docker image using the provided Dockerfile and start it using Docker Compose or docker run commands
+
+To see the web application for API, please see my repo https://github.com/pross99/wowItemTracker
