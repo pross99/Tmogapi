@@ -2,6 +2,7 @@ package dev.peterross.Ttracker2;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Item {
     @Id
     private ObjectId id;
@@ -23,9 +25,9 @@ public class Item {
     private String itemName;
     private String slot;
     private String wowHeadLink;
-    private String Expansion;
+    private String expansion;
     private String location;
-
+    private String backdrops;
 
     public Item(String itemName, String wowheadId, String slot, String wowHeadLink, String location, String backdrops, String expansion) {
         this.wowheadId = wowheadId;
@@ -34,12 +36,12 @@ public class Item {
 
         this.slot = slot;
         this.wowHeadLink = wowHeadLink;
-        this.Expansion = expansion;
+        this.expansion = expansion;
         this.location = location;
         this.backdrops = backdrops;
     }
 
-    private String backdrops;
+    
 
 
 
