@@ -50,3 +50,11 @@ MONGO_CLUSTER: name of the cluster
 To run the application, you can build the Docker image using the provided Dockerfile and start it using Docker Compose or docker run commands
 
 To see the web application for API, please see my repo https://github.com/pross99/wowItemTracker
+
+
+
+
+NOTE: 
+
+API CAN BE PULLED FROM https://springtransmogapi5-714423430443.europe-west1.run.app 
+FREE TRIAL with 90 DAYS 30/09/2024
