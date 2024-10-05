@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/items")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -53,6 +54,13 @@ public class ItemController {
        
     }
 
+    @PutMapping("/{wowheadId}")
+    public ResponseEntity<Item> updateByWowheadId(@PathVariable String wowheadId, @RequestBody Item newItem) {
+        Optional<Item> updatedItem = itemService.updateByWowheadId(wowheadId, newItem);
+        
+   
+         return updatedItem.map(ResponseEntity::ok)
+                          .orElseGet(() -> ResponseEntity.notFound().build());
 
-
+    }
 }

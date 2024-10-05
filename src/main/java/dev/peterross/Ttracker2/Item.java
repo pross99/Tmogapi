@@ -41,6 +41,70 @@ public class Item {
         this.backdrops = backdrops;
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getWowheadId() {
+        return wowheadId;
+    }
+
+    public void setWowheadId(String wowheadId) {
+        this.wowheadId = wowheadId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getSlot() {
+        return slot;
+    }
+
+    public void setSlot(String slot) {
+        this.slot = slot;
+    }
+
+    public String getWowHeadLink() {
+        return wowHeadLink;
+    }
+
+    public void setWowHeadLink(String wowHeadLink) {
+        this.wowHeadLink = wowHeadLink;
+    }
+
+    public String getExpansion() {
+        return expansion;
+    }
+
+    public void setExpansion(String expansion) {
+        this.expansion = expansion;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getBackdrops() {
+        return backdrops;
+    }
+
+    public void setBackdrops(String backdrops) {
+        this.backdrops = backdrops;
+    }
+
     
 
 

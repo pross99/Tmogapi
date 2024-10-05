@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ItemRepository extends MongoRepository<Item, ObjectId> {
 
-    Optional<Item> findItemBywowheadId(String wowheadId);
+    Optional<Item> findItemByWowheadId(String wowheadId);
     Optional<Item> deleteById(String wowheadId);
 
 
