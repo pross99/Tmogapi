@@ -40,9 +40,16 @@ public class ItemService {
 
 
 
-    public Item createItem(Item item) {
-        Item saved = itemRepository.save(item);
-        return saved;
+    public Item createItem(Item item) throws Exception {
+        // CHECK IF A NITEM WITH THE SAME WOWHEAD ID ALREADY EXISTS
+        Optional<Item> existingItem = itemRepository.findItemByWowheadId(item.getWowheadId());
+
+        if(existingItem.isPresent()) {
+            throw new Exception("An item with this wowhead ID already exists.");
+
+        }
+
+        return itemRepository.save(item);
     }
 
     public Optional<Item> updateByWowheadId(String wowheadId, Item newItem) {
@@ -54,6 +61,7 @@ public class ItemService {
             item.setExpansion(newItem.getExpansion());
             item.setLocation(newItem.getLocation());
             item.setBackdrops(newItem.getBackdrops());
+            item.setUserId(newItem.getUserId());
             return itemRepository.save(item);
 
         });

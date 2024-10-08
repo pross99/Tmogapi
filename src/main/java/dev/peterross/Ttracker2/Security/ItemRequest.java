@@ -1,29 +1,6 @@
-package dev.peterross.Ttracker2.Entities;
+package dev.peterross.Ttracker2.Security;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
-@Document(collection = "items")
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-
-
-public class Item {
-    @Id
-    private ObjectId id;
-
-    @Indexed
+public class ItemRequest {
     private String wowheadId;
     private String itemName;
     private String slot;
@@ -32,19 +9,6 @@ public class Item {
     private String location;
     private String backdrops;
     private String userId;
-
-    
-
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
 
     public String getWowheadId() {
         return wowheadId;
@@ -102,10 +66,13 @@ public class Item {
         this.backdrops = backdrops;
     }
 
-  
+    public String getUserId() {
+        return userId;
+    }
 
-    
-
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
 
 }

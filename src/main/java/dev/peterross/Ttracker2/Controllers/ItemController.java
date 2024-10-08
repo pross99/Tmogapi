@@ -16,7 +16,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
+
 import dev.peterross.Ttracker2.Entities.Item;
+import dev.peterross.Ttracker2.Security.ItemRequest;
 
 
 @RestController
@@ -24,7 +27,7 @@ import dev.peterross.Ttracker2.Entities.Item;
 @CrossOrigin(origins = "http://localhost:3000")
 @Async
 public class ItemController {
-
+String errorMessage = "WOWHEAD ID already exists";
     @Autowired
     private ItemService itemService;
 
@@ -40,10 +43,16 @@ public class ItemController {
 
 
     @PostMapping("/post")
-    public ResponseEntity<Item> createItem(@RequestBody Item item)  {
-        return new ResponseEntity<Item>(itemService.createItem(item),HttpStatus.CREATED);
-
+    public ResponseEntity<Item> createItem(@RequestBody Item item) throws Exception {
+        try {
+            Item createdItem = itemService.createItem(item);
+            return new ResponseEntity<>(createdItem, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            // Handle the duplicate item exception
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT); // 409 Conflict
+        }
     }
+    
 
     @DeleteMapping("/{wowheadId}")
     public ResponseEntity<Void> deleteItem(@PathVariable String wowheadId) {
