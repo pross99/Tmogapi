@@ -1,10 +1,13 @@
-package dev.peterross.Ttracker2;
+package dev.peterross.Ttracker2.Services;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
+import dev.peterross.Ttracker2.Entities.Item;
+import dev.peterross.Ttracker2.Repositories.ItemRepository;
 @Service
 public class ItemService {
 
@@ -14,10 +17,16 @@ public class ItemService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public List<Item> allItems()  {return itemRepository.findAll();}
+    public List<Item> allItems()  {
+        return itemRepository.findAll();
+    }
 
 
-    public Optional<Item> singleItem(String wowheadId) {return itemRepository.findItemByWowheadId(wowheadId);}
+    public Optional<Item> singleItem(String wowheadId) {
+        
+        return itemRepository.findItemByWowheadId(wowheadId);
+    
+    }
 
 
     public boolean deleteById(String wowheadId) {

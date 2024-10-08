@@ -1,4 +1,4 @@
-package dev.peterross.Ttracker2;
+package dev.peterross.Ttracker2.Entities;
 
 
 import lombok.AllArgsConstructor;
@@ -9,8 +9,6 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
-import java.util.List;
 
 @Document(collection = "items")
 @Data
@@ -31,9 +29,7 @@ public class Item {
 
     public Item(String itemName, String wowheadId, String slot, String wowHeadLink, String location, String backdrops, String expansion) {
         this.wowheadId = wowheadId;
-
         this.itemName = itemName;
-
         this.slot = slot;
         this.wowHeadLink = wowHeadLink;
         this.expansion = expansion;

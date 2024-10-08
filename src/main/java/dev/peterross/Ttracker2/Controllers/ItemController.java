@@ -1,4 +1,4 @@
-package dev.peterross.Ttracker2;
+package dev.peterross.Ttracker2.Controllers;
 
 import java.io.Console;
 
@@ -10,9 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
+import dev.peterross.Ttracker2.Services.ItemService;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import dev.peterross.Ttracker2.Entities.Item;
 
 
 @RestController
