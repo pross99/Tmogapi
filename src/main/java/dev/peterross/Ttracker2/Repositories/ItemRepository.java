@@ -13,6 +13,7 @@ public interface ItemRepository extends MongoRepository<Item, ObjectId> {
 
     Optional<Item> findItemByWowheadId(String wowheadId);
     Optional<Item> deleteById(String wowheadId);
+    Optional<Item> findByUserIdAndWowheadId(String userId, String wowheadId);
 
 
 

@@ -11,6 +11,8 @@ import dev.peterross.Ttracker2.Repositories.ItemRepository;
 @Service
 public class ItemService {
 
+
+
     @Autowired
     private ItemRepository itemRepository;
 
@@ -38,11 +40,10 @@ public class ItemService {
         return false; // Item not found, couldn't delete
     }
 
-
-
     public Item createItem(Item item) throws Exception {
-        // CHECK IF A NITEM WITH THE SAME WOWHEAD ID ALREADY EXISTS
-        Optional<Item> existingItem = itemRepository.findItemByWowheadId(item.getWowheadId());
+        // CHECK IF AN ITEM WITH THE SAME WOWHEAD ID ALREADY EXISTS
+        // NEED TO ADD FUNTCION TO CHECK IF THE WOWHEAD ID ALREADY EXISTS ONLY ON USERID
+        Optional<Item> existingItem = itemRepository.findByUserIdAndWowheadId(item.getUserId(), item.getWowheadId());
 
         if(existingItem.isPresent()) {
             throw new Exception("An item with this wowhead ID already exists.");
