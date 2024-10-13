@@ -1,4 +1,7 @@
 package dev.peterross.Ttracker2.Controllers;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +41,17 @@ public class UserController {
 }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
         Optional <User> user = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
     
         if (user.isPresent()) {
-            return ResponseEntity.ok("Success! GZ" + user.get().getUsername());
+            Map<String, String> responseBody  = new HashMap<>();
+            responseBody.put("Message", "Login Successfull!");
+            responseBody.put("username", user.get().getUsername()); // RETURN USERNAME
+
+            return ResponseEntity.ok(responseBody); // return JSON
         } else {
-            return ResponseEntity.status(401).body("Invalid username or password");
+            return ResponseEntity.status(401).body(Collections.singletonMap("error","Invalid username or password"));
         }
     }
 }
