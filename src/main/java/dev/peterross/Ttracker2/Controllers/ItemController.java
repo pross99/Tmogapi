@@ -1,25 +1,14 @@
 package dev.peterross.Ttracker2.Controllers;
-
-import java.io.Console;
-
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import dev.peterross.Ttracker2.Services.ItemService;
-
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-
-import org.apache.catalina.connector.Response;
-
 import dev.peterross.Ttracker2.Entities.Item;
-import dev.peterross.Ttracker2.Security.ItemRequest;
 
 
 @RestController
