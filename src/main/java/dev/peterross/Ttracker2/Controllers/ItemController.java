@@ -1,14 +1,28 @@
 package dev.peterross.Ttracker2.Controllers;
+import java.lang.System.Logger;
+import java.util.List;
+import java.util.Optional;
+
+import org.bson.types.ObjectId;
+
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import dev.peterross.Ttracker2.Services.ItemService;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import dev.peterross.Ttracker2.Entities.Item;
+import dev.peterross.Ttracker2.Services.ItemService;
 
 
 @RestController
@@ -20,9 +34,27 @@ String errorMessage = "WOWHEAD ID already exists";
     @Autowired
     private ItemService itemService;
 
-    @GetMapping
-    public ResponseEntity<List<Item>> getAllItems() {
-        return new ResponseEntity<List<Item>>(itemService.allItems(), HttpStatus.OK);
+
+
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getAllItems(@PathVariable String userId) {
+
+     try {
+            // Convert String to ObjectId, will throw IllegalArgumentException if invalid
+            ObjectId userObjectId = new ObjectId(userId);
+            
+            // Fetch items for the user
+            List<Item> items = itemService.allItems(userObjectId);
+
+            return new ResponseEntity<>(items, HttpStatus.OK);
+
+        } catch (IllegalArgumentException e) {
+            // Return bad request if userId is not a valid ObjectId
+            return new ResponseEntity<>("Invalid userId format", HttpStatus.BAD_REQUEST);
+        }
+        
+       
     }
 
     @GetMapping("/{wowheadId}")

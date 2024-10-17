@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "items")
 @Data
@@ -31,15 +33,16 @@ public class Item {
     private String expansion;
     private String location;
     private String backdrops;
-    private String userId;
+    @Field("userId")
+    private ObjectId userId;
 
     
 
-    public String getUserId() { 
-        return userId; 
+    public ObjectId getUserId() {
+        return userId;
     }
-    public void setUserId(String userId) {
-        this.userId = userId; 
+    public void setUserId(ObjectId userId) {
+        this.userId = userId;
     }
 
     public ObjectId getId() {

@@ -48,6 +48,7 @@ public class UserController {
             Map<String, String> responseBody  = new HashMap<>();
             responseBody.put("Message", "Login Successfull!");
             responseBody.put("username", user.get().getUsername()); // RETURN USERNAME
+            responseBody.put("userId", user.get().getId());
 
             return ResponseEntity.ok(responseBody); // return JSON
         } else {

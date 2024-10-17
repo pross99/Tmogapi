@@ -2,6 +2,7 @@ package dev.peterross.Ttracker2.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,16 @@ public class ItemService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public List<Item> allItems()  {
-        return itemRepository.findAll();
+    public List<Item> allItems(ObjectId userId)  {
+        List<Item> items = itemRepository.findByUserId(userId);
+
+        if (items.isEmpty()) {
+            System.out.println("No items found for userId: " + userId);
+        } else {
+            System.out.println("Items found: " + items);
+        }
+
+        return items;
     }
 
 
