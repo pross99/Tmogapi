@@ -47,6 +47,7 @@ String errorMessage = "WOWHEAD ID already exists";
             // Fetch items for the user
             List<Item> items = itemService.allItems(userObjectId);
 
+
             return new ResponseEntity<>(items, HttpStatus.OK);
 
         } catch (IllegalArgumentException e) {
