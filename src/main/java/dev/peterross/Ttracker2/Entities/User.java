@@ -10,16 +10,24 @@ import lombok.NoArgsConstructor;
 
 @Document(collection = "users")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
 public class User {
     @Id
     private String id;
 
-    @Indexed // Require unique username
+    @Indexed// Require unique username
     private String username;
     private String password;
     private String charLink;
+
+    public User(String username, String encodedPassword) {
+        this.username = username;
+        this.password = encodedPassword;
+    }
+
+
 
     public void setPassword(String password) {
         this.password = password;
@@ -45,6 +53,8 @@ public class User {
         this.id = id;
     }
 
+  
+    
 
     
     

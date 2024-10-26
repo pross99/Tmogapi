@@ -3,13 +3,14 @@ package dev.peterross.Ttracker2.Services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mongodb.DuplicateKeyException;
-
 import dev.peterross.Ttracker2.Entities.User;
 import dev.peterross.Ttracker2.Repositories.UserRepository;
+import dev.peterross.Ttracker2.Security.SignupRequest;
+import dev.peterross.Ttracker2.Utility.MessageResponse;
 
 @Service
 public class UserService{
@@ -21,25 +22,37 @@ public class UserService{
    public Optional<User> findUserByUsername (String username) {
     return userRepository.findByUsername(username);
   }
+
+
   private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-  public User RegisterUser (User user) throws Exception {
-  if(userRepository.findByUsername(user.getUsername()) != null) {
-    throw new Exception("Username already in use");
-  }
-
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-  try {
-    return userRepository.save(user);
-}   catch (DuplicateKeyException e) {
-  throw new Exception ("Username already exists (from databaase)");
-}
   
 
+  public ResponseEntity <?> registerUser (SignupRequest signupRequest) {
 
+  try {
+      
+    if(userRepository.existsByUsername(signupRequest.getUsername())) {
+      return ResponseEntity 
+        .badRequest()
+        .body(new MessageResponse("ERROR: Username is already in use!"));
+    }
 
-}
+     User user = new User(
+      signupRequest.getUsername(),
+      passwordEncoder.encode(signupRequest.getPassword())
+    ); 
+
+      userRepository.save(user);
+
+      return ResponseEntity.ok(new MessageResponse("User registered!")); 
+    } catch (Exception e) {
+      return ResponseEntity
+      .internalServerError()
+      .body(new MessageResponse("Error" + e.getMessage()));
+    }
+  }
+
 
 public Optional<User> authenticate (String username, String password) {
   Optional<User> userOpt = userRepository.findByUsername(username);
