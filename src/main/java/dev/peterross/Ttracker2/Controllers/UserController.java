@@ -42,9 +42,18 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody SignupRequest signupRequest) {
+
         try {
         userService.registerUser(signupRequest);
-        return ResponseEntity.ok("User has been registered");
+        Optional <User> user = userService.findUserByUsername(signupRequest.getUsername());
+        String jwt = jwtUtil.generateToken(signupRequest.getUsername());
+        Map<String, String> responseBody  = new HashMap<>();
+            responseBody.put("Message", "Registration Successfull!");
+            responseBody.put("token", jwt);
+            responseBody.put("username", user.get().getUsername()); // RETURN USERNAME
+            responseBody.put("userId", user.get().getId());
+
+            return ResponseEntity.ok(responseBody);
         
     } catch (Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
