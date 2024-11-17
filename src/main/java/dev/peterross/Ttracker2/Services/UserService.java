@@ -31,16 +31,36 @@ public class UserService{
   public ResponseEntity <?> registerUser (SignupRequest signupRequest) {
 
   try {
-      
+    System.out.println("Registering user: " +
+    "Username:" + signupRequest.getUsername() +
+    "charName:" + signupRequest.getCharName() +
+    "Username:" + signupRequest.getCharServer());
+
     if(userRepository.existsByUsername(signupRequest.getUsername())) {
       return ResponseEntity 
         .badRequest()
         .body(new MessageResponse("ERROR: Username is already in use!"));
     }
 
+    if(signupRequest.getCharName() == null | signupRequest.getCharName().trim().isEmpty()) {
+      return ResponseEntity 
+        .badRequest()
+        .body(new MessageResponse("ERROR: Character name is required"));
+    }
+
+    if(signupRequest.getCharServer() == null | signupRequest.getCharServer().trim().isEmpty()) {
+      return ResponseEntity 
+        .badRequest()
+        .body(new MessageResponse("ERRIR; Character server is required!"));
+    }
+
      User user = new User(
+
       signupRequest.getUsername(),
-      passwordEncoder.encode(signupRequest.getPassword())
+      passwordEncoder.encode(signupRequest.getPassword()),
+      signupRequest.getCharName(),
+      signupRequest.getCharServer()
+      
     ); 
 
       userRepository.save(user);

@@ -20,11 +20,14 @@ public class User {
     @Indexed// Require unique username
     private String username;
     private String password;
-    private String charLink;
+    private String charName;
+    private String charServer;
 
-    public User(String username, String encodedPassword) {
+    public User(String username, String encodedPassword, String charName, String charServer) {
         this.username = username;
         this.password = encodedPassword;
+        this.charName = charName;
+        this.charServer = charServer;
     }
 
 
@@ -53,10 +56,21 @@ public class User {
         this.id = id;
     }
 
-  
-    
+    public String getCharName() {
+        return charName;
+    }
 
-    
+    public void setCharName(String charName) {
+        this.charName = charName;
+    }
+
+    public String getCharServer() {
+        return charServer;
+    }
+
+    public void setCharServer(String charServer) {
+        this.charServer = charServer;
+    }
     
 }
 

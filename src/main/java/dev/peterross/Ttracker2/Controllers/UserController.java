@@ -22,6 +22,7 @@ import dev.peterross.Ttracker2.Security.JwtUtil;
 import dev.peterross.Ttracker2.Security.LoginRequest;
 import dev.peterross.Ttracker2.Security.SignupRequest;
 import dev.peterross.Ttracker2.Services.UserService;
+import dev.peterross.Ttracker2.Utility.MessageResponse;
 
 
 
@@ -44,19 +45,39 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody SignupRequest signupRequest) {
 
         try {
-        userService.registerUser(signupRequest);
+
+        ResponseEntity<?> registrationResponse = userService.registerUser(signupRequest);
+
+
+        if(!registrationResponse.getStatusCode().equals(HttpStatus.OK)) {
+            return registrationResponse;
+        }
+
+        // REGISTRATION SUCCESSFUL:
         Optional <User> user = userService.findUserByUsername(signupRequest.getUsername());
+        if(!user.isPresent()) {
+            return ResponseEntity
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new MessageResponse("ERROR: USER NOT FOUND AFTER REGISTRATION"));
+        }
+
         String jwt = jwtUtil.generateToken(signupRequest.getUsername());
+
         Map<String, String> responseBody  = new HashMap<>();
             responseBody.put("Message", "Registration Successfull!");
             responseBody.put("token", jwt);
             responseBody.put("username", user.get().getUsername()); // RETURN USERNAME
             responseBody.put("userId", user.get().getId());
+            responseBody.put("charName", user.get().getCharName());
+            responseBody.put("charServer", user.get().getCharServer());
 
             return ResponseEntity.ok(responseBody);
+
         
     } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .body(e.getMessage());
     }
 }
 
@@ -96,6 +117,8 @@ public class UserController {
             responseBody.put("token", jwt);
             responseBody.put("username", user.get().getUsername()); // RETURN USERNAME
             responseBody.put("userId", user.get().getId());
+            responseBody.put("charName", user.get().getCharName());
+            responseBody.put("charServer", user.get().getCharServer());
 
             return ResponseEntity.ok(responseBody);
 

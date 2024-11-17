@@ -1,5 +1,4 @@
 package dev.peterross.Ttracker2.Security;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -9,22 +8,27 @@ public class SignupRequest {
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Please provide a valid email address")
-    private String email;
-
     @NotBlank(message = "Password is required")
     @Size(min = 6, max = 40, message = "Password must be between 6 and 40 characters")
     private String password;
+
+    @NotBlank(message = "charName is required!")
+    @Size(min = 3, max = 12, message = "Username must be between 3 and 12 characters")
+    private String charName;
+
+    @NotBlank(message = "Server is required")
+    @Size(min = 3, max = 20, message = "Server name must be between 3 and 20 characters")
+    private String charServer;
 
     // Constructor
     public SignupRequest() {
     }
 
-    public SignupRequest(String username, String email, String password) {
+    public SignupRequest(String username, String password, String charName, String charServer) {
         this.username = username;
-        this.email = email;
         this.password = password;
+        this.charName = charName;
+        this.charServer = charServer;
     }
 
     // Getters and Setters
@@ -36,14 +40,6 @@ public class SignupRequest {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -52,13 +48,35 @@ public class SignupRequest {
         this.password = password;
     }
 
+    public String getCharServer() {
+        return charServer;
+    }
+
+    public void setCharServer(String charServer) {
+        this.charServer = charServer;
+    }
+
+
+    public String getCharName() {
+        return charName;
+    }
+
+    public void setCharName(String charName) {
+        this.charName = charName;
+    }
+
+
+
     // Optional: Override toString() (but exclude password for security)
     @Override
     public String toString() {
         return "SignupRequest{" +
             "username='" + username + '\'' +
-            ", email='" + email + '\'' +
             ", password='[PROTECTED]'" +
+            ", charName='" + charName +
+            ", charServer='" + charServer +
             '}';
     }
+
+ 
 }
