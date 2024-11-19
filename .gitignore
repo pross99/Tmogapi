@@ -36,6 +36,9 @@ build/
 ### VS Code ###
 .vscode/
 
-
+.application.properties
+/application.properties
 ### DB LOGINS ###
 .env
+/src/main/resources/application.properties
+\T-tracker2\src\main\resources\application.properties
