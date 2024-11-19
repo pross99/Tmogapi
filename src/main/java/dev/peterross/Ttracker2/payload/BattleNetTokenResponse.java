@@ -4,13 +4,14 @@ public class BattleNetTokenResponse {
     private String access_token;
     private String token_type;
     private int expires_in;
+    private String sub;
 
 
-    public String getAccessToken() {
+    public String getaccess_token() {
         return access_token;
     }
 
-    public void setAccessToken(String access_token) {
+    public void setaccess_token(String access_token) {
         this.access_token = access_token;
     }
 
@@ -28,6 +29,14 @@ public class BattleNetTokenResponse {
 
     public void setExpires_in(int expires_in) {
         this.expires_in = expires_in;
+    }
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
     }
 
 
