@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
                                 .anyRequest().permitAll() // Allow all requests without authentication
+                                
                 
                 )
                 .sessionManagement(session -> session

@@ -23,6 +23,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class TTracker2Application {
 
+
+    static {
+        System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1");
+    }
 	public static void main(String[] args) {
 		SpringApplication.run(TTracker2Application.class, args);
 	}
@@ -34,7 +38,7 @@ public class TTracker2Application {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:3000")
+                    .allowedOrigins("http://localhost:3000", "https://springtransmogapi5-714423430443.europe-west1.run.app")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
                     .allowCredentials(true);
