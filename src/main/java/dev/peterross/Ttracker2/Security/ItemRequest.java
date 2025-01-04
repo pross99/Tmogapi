@@ -9,6 +9,7 @@ public class ItemRequest {
     private String location;
     private String backdrops;
     private String userId;
+    private Boolean completed;
 
     public String getWowheadId() {
         return wowheadId;
@@ -74,5 +75,12 @@ public class ItemRequest {
         this.userId = userId;
     }
 
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
 
 }

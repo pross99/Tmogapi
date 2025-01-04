@@ -1,16 +1,15 @@
 package dev.peterross.Ttracker2.Entities;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "items")
 @Data
@@ -33,6 +32,7 @@ public class Item {
     private String backdrops;
     @Field("userId")
     private ObjectId userId;
+    private Boolean completed;
 
     
 
@@ -107,9 +107,13 @@ public class Item {
         this.backdrops = backdrops;
     }
 
-  
+    public Boolean getCompleted() {
+        return completed;
+    }
 
-    
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
 
 
 

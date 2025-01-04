@@ -72,6 +72,7 @@ public class ItemService {
             item.setLocation(newItem.getLocation());
             item.setBackdrops(newItem.getBackdrops());
             item.setUserId(newItem.getUserId());
+            item.setCompleted(newItem.getCompleted());
             return itemRepository.save(item);
 
         });
